@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:c="http://java.sun.com/jstl/core"
+                template="/WEB-INF/templates/default.xhtml">
+    <ui:define name="content">
+
+        <div data-role="header">
+            <h:form>
+                <div data-role="header">
+                    <h:commandLink value="Home" data-icon="home" action="main.xhtml"/>
+                    <a href="#" data-icon="gear">Edit</a>
+                </div>
+            </h:form>
+            <span class="ui-title" />
+        </div><!-- /header -->
+
+        <h:form>
+            <div data-role="content">
+
+                <div align="center">
+                    <table>
+                        <tr>
+                           <td><a href="#recommendSelection" data-rel="popup" data-role="button" data-inline="true" data-icon="bars" data-theme="b" data-transition="pop">Recommendation</a></td>
+                        </tr>
+                    </table>
+                </div>
+
+
+               <div data-role="popup" id="recommendSelection" data-theme="none">
+                    <ul data-role="listview">
+                        <ui:repeat value="#{playerController.getRecommendation()}" var="rec">
+                            <li>
+                                <h:commandLink value="#{rec.name}" data-role="button" data-icon="plus" data-theme="c" action="#{playerController.addRecommendationToShots(rec)}"/>
+                            </li>
+                        </ui:repeat>
+                    </ul>
+                </div>
+
+                <div align="center">
+                    <table>
+                        <tr>
+                            <td>Shot</td>
+                            <td><h:outputText value="#{playerController.playerProfile.playerShot.shotID.name}" /></td>
+                            <td>Type </td>
+                            <td><h:outputText value="#{playerController.playerProfile.playerShot.shotID.shotTypeID.type}" /></td>
+                        </tr>
+                        <tr>
+                            <td>Task</td>
+                            <td><h:outputText value="#{playerController.playerProfile.shotTask.taskID.name}" /></td>
+                            <td>Date Started</td>
+                            <td><h:outputText value="#{playerController.playerProfile.shotTask.taskID.startDate}"/></td>
+                        </tr>
+                    </table>
+
+
+                    <ul data-role="listview" data-count-theme="c" data-inset="true">
+                        <ui:repeat value="#{playerController.playerProfile.shotTask.recommendationList}" var="rec">
+                            <li>
+                                <a href="#">#{rec.name} <span class="ui-li-count">0</span></a>
+                            </li>
+                        </ui:repeat>
+                    </ul>
+                </div>
+            </div>
+
+        </h:form>
+    </ui:define>
+</ui:composition>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+<h:head>
+   <title>Java EE 6 Starter Application</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+
+    <link rel="stylesheet" href="themes/tennis.min.css" />
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.0/jquery.mobile.structure-1.3.0.min.css" />
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"/>
+
+    <script>
+        $(document).bind("mobileinit", function () {
+            $.mobile.defaultPageTransition = 'flow';
+        });
+
+
+    </script>
+
+    <script src="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.js"/>
+
+
+
+
+    <style media="screen" type="text/css">
+        .floatright {
+            text-align:right;
+            height:50px
+         }
+        .floatleft {
+            text-align:left;
+            height:50px
+        }
+    </style>
+
+
+    <!-- Custom css -->
+
+
+    <!-- Javascript includes -->
+
+
+</h:head>
+<h:body>
+
+
+  <div data-role="page" data-theme="a">
+
+      <div id="content">
+           <ui:insert name="content">
+                    [Template content will be inserted here]
+                </ui:insert>
+      </div>
+
+
+  <!-- <div data-role="footer" data-id="foo1" data-position="fixed">
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="index.xhtml" class="ui-btn-active ui-state-persist">Home</a></li>
+                    <li><a href="players.jsf">Players</a></li>
+                    <li><a href="contact/contacts.jsp">Contacts</a></li>
+                </ul>
+            </div>
+        </div>--><!-- /footer -->
+
+   </div>
+
+
+
+</h:body>
+</html>

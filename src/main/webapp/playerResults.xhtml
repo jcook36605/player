@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                template="/WEB-INF/templates/default.xhtml">
+    <ui:define name="content">
+
+        <h:form>
+        <div data-role="header">
+            <a href="main.jsf" data-icon="home" >Home</a>
+            <a href="createPlayer.jsf" data-icon="plus" data-direction="reverse"  >Add Player</a>
+            <span class="ui-title" />
+        </div><!-- /header -->
+        </h:form>
+
+        <h:form>
+        <div data-role="content">
+
+            <ul data-role="listview">
+                <ui:repeat value="#{playerController.players}" var="player">
+                <li>
+                  <h:commandLink value="#{player.firstName} #{player.lastName}" action="#{playerController.selectPlayer(player.id)}"/>
+                </li>
+                </ui:repeat>
+            </ul>
+        </div>
+        </h:form>
+
+    </ui:define>
+</ui:composition>

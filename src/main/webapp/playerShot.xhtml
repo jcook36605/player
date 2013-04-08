@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:c="http://java.sun.com/jstl/core"
+                template="/WEB-INF/templates/default.xhtml">
+
+       <ui:define name="content">
+          <h:form>
+               <div data-role="header">
+                   <a href="player.jsf" data-icon="back"  data-direction="reverse" >Back</a>
+                   <h1>Player Profile</h1>
+                   <a href="main.jsf" data-icon="home"  >Home</a>
+                   <span class="ui-title" />
+               </div><!-- /header -->
+           </h:form>
+
+          <h:form>
+            <div data-role="content">
+
+                <div align="center">
+                    <table>
+                        <tr>
+                            <td>
+                                <a href="#shotTaskPopup" data-rel="popup" data-role="button" data-inline="true" data-icon="bars" data-theme="b" data-transition="pop">Task By Shot</a>
+
+                            </td>
+                            <td>
+                                <a href="#shotTaskAllPopup" data-rel="popup" data-role="button" data-inline="true" data-icon="bars" data-theme="b" data-transition="pop">All Task</a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div data-role="popup" id="shotTaskPopup" data-theme="none">
+                    <ul data-role="listview">
+                        <ui:repeat value="#{playerController.shotTasks}" var="task">
+                            <li>
+                                <h:commandLink value="#{task.name}" data-role="button" data-icon="plus" data-theme="c" action="#{playerController.addTaskToShot(task)}" />
+                            </li>
+                        </ui:repeat>
+                    </ul>
+                </div>
+
+                <div data-role="popup" id="shotTaskAllPopup" data-theme="none">
+                    <ul data-role="listview">
+                        <ui:repeat value="#{playerController.allTasks}" var="task">
+                            <li>
+                                <h:commandLink value="#{task.name}" data-role="button" data-icon="plus" data-theme="c" action="#{playerController.addTaskToShot(task)}" />
+                            </li>
+                        </ui:repeat>
+                    </ul>
+                </div>
+
+
+                <div align="center">
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a">
+                            <div class="ui-bar ui-bar-a floatright" >
+                                <h:outputLabel value="Shot:"/>
+                            </div>
+                            <div class="ui-bar ui-bar-a floatright" >
+                                <h:outputLabel value="Type:"/>
+                            </div>
+                        </div>
+                        <div class="ui-block-c">
+                            <div class="ui-bar ui-bar-c floatleft" style="white-space:nowrap;">
+                                <h:outputText value="#{playerController.playerProfile.playerShot.shotID.name}" />
+                                <a href="#shotInfoPopup" data-rel="popup" data-role="button" class="ui-icon-alt" data-inline="true" data-transition="pop" data-icon="info" data-mini="true" data-theme="e" data-iconpos="notext"/>
+                             </div>
+                            <div class="ui-bar ui-bar-c floatleft">
+                                <h:outputText value="#{playerController.playerProfile.playerShot.shotID.shotTypeID.type}" />
+                                <a href="#shotTypePopup" data-rel="popup" data-role="button" class="ui-icon-alt" data-inline="true" data-transition="pop" data-icon="info" data-mini="true" data-theme="e" data-iconpos="notext"/>
+                            </div>
+                        </div>
+
+                    </div><!-- /grid-a -->
+
+                    <div data-role="popup" id="shotInfoPopup" class="ui-content" data-theme="a">
+                        <p>#{playerController.playerProfile.playerShot.shotID.description}</p>
+                    </div>
+
+                    <div data-role="popup" id="shotTypePopup" class="ui-content" data-theme="a">
+                        <p>#{playerController.playerProfile.playerShot.shotID.shotTypeID.description}</p>
+                    </div>
+
+                    <ul data-role="listview" data-count-theme="c" data-theme="b" data-inset="true">
+                        <li data-role="list-divider" data-count-theme="b" data-theme="a">Selected Task(s)</li>
+                        <ui:repeat value="#{playerController.playerShotTasks}" var="shotTask">
+                            <li>
+                                <h:commandLink value="#{shotTask.taskID.name}" action="#{playerController.selectShotTask(shotTask)}">
+                                <span class="ui-li-count">0</span>
+                                </h:commandLink>
+                            </li>
+                        </ui:repeat>
+                    </ul>
+
+
+
+                </div>
+
+
+            </div>
+          </h:form>
+<!--
+           <div data-role="footer">
+               <div data-role="navbar" data-iconpos="top">
+                   <ul>
+                       <li><a href="#">One</a></li>
+                       <li><a href="#">Two</a></li>
+                       <li><a href="#">Three</a></li>
+                   </ul>
+               </div>&lt;!&ndash; /navbar &ndash;&gt;
+           </div>-->
+
+    </ui:define>
+</ui:composition>

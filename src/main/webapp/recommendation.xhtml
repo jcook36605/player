@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                template="/WEB-INF/templates/default.xhtml">
+    <ui:define name="content">
+
+            <h:form>
+                <div data-role="header">
+                    <h:commandLink value="Back"  data-direction="reverse" data-icon="back" action="adminRecommendation.xhtml"/>
+                    <span class="ui-title" />
+                </div><!-- /header -->
+            </h:form>
+
+
+        <h:form>
+
+
+            <div data-role="content">
+
+               <div align="center">
+
+                <h1>Recommendation</h1>
+                <h:panelGrid columns="1">
+
+
+                        <h:outputLabel value="Name:"/>
+                        <h:inputText value="#{adminController.recommendationManager.recommendation.name}" data-theme="a"/>
+
+                    <h:outputLabel value="Description:"/>
+                    <h:inputTextarea value="#{adminController.recommendationManager.recommendation.description}" data-theme="a" rows="12" cols="30"/>
+
+
+                </h:panelGrid>
+
+                   <!-- <div data-role="collapsible" data-theme="b" data-content-theme="d" data-collapsed-icon="arrow-d" data-expanded-icon="arrow-u">
+                        <h4>Player(s)</h4>
+                        <h:selectManyCheckbox data-role="listview" data-inset="false" layout="pageDirection" value="#{sessionController.playersManager.playerIds}">
+                            <f:selectItems value="#{sessionController.playersManager.players}"/>
+                        </h:selectManyCheckbox>
+                        <h:commandButton value="Save" action="#{sessionController.saveGroup()}"/>
+
+                    </div>-->
+                </div>
+            </div>
+
+
+
+            <div data-role="footer" class="ui-bar" data-theme="c" data-content-theme="b">
+                <h:commandLink value="Delete"  data-rel="popup" data-position-to="window" data-role="button" data-inline="true" data-icon="minus" data-theme="b" data-transition="pop"/>
+                <h:commandLink value="Cancel"  action="adminRecommendation.xhtml" data-role="button" data-inline="true" data-icon="cancel" data-theme="b"/>
+                <h:commandButton value="Save"  data-role="button" data-inline="true" data-theme="b"  data-icon="save"/>
+            </div>
+
+             </h:form>
+
+
+
+    </ui:define>
+</ui:composition>

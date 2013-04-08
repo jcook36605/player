@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                template="/WEB-INF/templates/default.xhtml">
+    <ui:define name="content">
+
+
+        <div data-role="header">
+            <br/>
+            <span class="ui-title" />
+        </div><!-- /header -->
+
+
+
+            <ul data-role="listview" data-split-icon="gear" data-split-theme="b">
+            <li>
+
+                    <a href="playerResults.xhtml" >
+
+                <h:graphicImage value="images/Games-Tennis-icon.png"/>
+                <h3>Player/Parents</h3>
+                <p>Shots, Rating, Notes and etc</p>
+                 </a>
+
+            </li>
+            <li>
+
+                    <a href="admin.xhtml" >
+                <h:graphicImage value="images/Games-Tennis-icon.png"/>
+                <h3>Coach</h3>
+                <p>Administration, Tasks, Groups, Tips and etc</p>
+                    </a>
+            </li>
+
+
+        </ul><!-- /content -->
+
+
+
+    </ui:define>
+</ui:composition>

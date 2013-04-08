@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:c="http://java.sun.com/jstl/core"
+                template="/WEB-INF/templates/default.xhtml">
+    <ui:define name="content">
+
+        <h:form>
+            <div data-role="header">
+                <a href="playerShot.jsf" data-icon="back" data-direction="reverse">Back</a>
+                <h1>Player Profile</h1>
+                <a href="player.jsf" data-icon="gear" >Profile</a>
+                <span class="ui-title" />
+            </div><!-- /header -->
+        </h:form>
+
+
+            <div data-role="content">
+
+                <div align="center">
+                    <table>
+                        <tr>
+                            <td><a href="#recommendSelection" data-rel="popup" data-role="button" data-inline="true" data-icon="bars" data-theme="b" data-transition="pop">Recommendation By Shot</a></td>
+                            <td><a href="#allRecommendSelection" data-rel="popup" data-role="button" data-inline="true" data-icon="bars" data-theme="b" data-transition="pop">Recommendation</a></td>
+                            <td><a href="#popupMenu"          data-rel="popup" data-role="button" data-inline="true" data-transition="slideup" data-icon="bars" data-theme="b">Note</a></td>
+                            <td><a href="#" data-rel="popup" data-role="button" data-inline="true" data-transition="slideup" data-icon="bars" data-theme="b">Tips</a></td>
+                        </tr>
+                    </table>
+                </div>
+
+
+                <div data-role="popup" id="popupMenu" data-theme="c">
+                    <h:form>
+                    <ul data-role="listview" data-inset="true" data-theme="b">
+                        <h3>Note:</h3>
+                        <textarea cols="40" rows="8" name="note" id="notes"></textarea>
+                        <h:commandButton value="Save" action="#{playerController.addNote()}"/>
+                    </ul>
+                    </h:form>
+                </div>
+
+                <div data-role="popup" id="recommendSelection">
+                    <ul data-role="listview">
+                        <ui:repeat value="#{playerController.shotRecommendations}" var="rec">
+                            <li>
+                                <h:form>
+                                <h:commandLink value="#{rec.name}" data-role="button" data-icon="plus" data-theme="c" action="#{playerController.addRecommendationToShots(rec)}"/>
+                                </h:form>
+                            </li>
+                        </ui:repeat>
+                    </ul>
+                </div>
+
+                <div data-role="popup" id="allRecommendSelection">
+                    <ul data-role="listview">
+                        <ui:repeat value="#{playerController.allRecommendations}" var="rec">
+                            <li>
+                                <h:form>
+                                    <h:commandLink value="#{rec.name}" data-role="button" data-icon="plus" data-theme="c" action="#{playerController.addRecommendationToShots(rec)}"/>
+                                </h:form>
+                            </li>
+                        </ui:repeat>
+                    </ul>
+                </div>
+
+                <div align="center">
+                    <h:form>
+                        <div class="ui-grid-a">
+                            <div class="ui-block-a">
+                                <div class="ui-bar ui-bar-a floatright" >
+                                    <h:outputLabel value="Shot:"/>
+                                </div>
+                                <div class="ui-bar ui-bar-a floatright" >
+                                    <h:outputLabel value="Type:"/>
+                                </div>
+                                <div class="ui-bar ui-bar-a floatright" >
+                                    <h:outputLabel value="Task:"/>
+                                </div>
+                            </div>
+                            <div class="ui-block-b">
+                                <div class="ui-bar ui-bar-b floatleft">
+                                    <h:outputText value="#{playerController.playerProfile.playerShot.shotID.name}" />
+                                    <a href="#shotInfoPopup" data-rel="popup" data-role="button" class="ui-icon-alt" data-inline="true" data-transition="pop" data-icon="info" data-mini="true" data-theme="e" data-iconpos="notext"/>
+                                </div>
+                                <div class="ui-bar ui-bar-b floatleft">
+                                    <h:outputText value="#{playerController.playerProfile.playerShot.shotID.shotTypeID.type}" />
+                                    <a href="#shotTypePopup" data-rel="popup" data-role="button" class="ui-icon-alt" data-inline="true" data-transition="pop" data-icon="info" data-mini="true" data-theme="e" data-iconpos="notext"/>
+                                </div>
+                                <div class="ui-bar ui-bar-b floatleft">
+                                    <h:outputText value="#{playerController.playerProfile.shotTask.taskID.name}" />
+                                    <a href="#taskPopup" data-rel="popup" data-role="button" class="ui-icon-alt" data-inline="true" data-transition="pop" data-icon="info" data-mini="true" data-theme="e" data-iconpos="notext"/>
+                                </div>
+                            </div>
+
+                        </div><!-- /grid-a -->
+                        <div data-role="popup" id="shotInfoPopup" class="ui-content" data-theme="a">
+                            <p>#{playerController.playerProfile.playerShot.shotID.description}</p>
+                        </div>
+
+                        <div data-role="popup" id="shotTypePopup" class="ui-content" data-theme="a">
+                            <p>#{playerController.playerProfile.playerShot.shotID.shotTypeID.description}</p>
+                        </div>
+                        <div data-role="popup" id="taskPopup" class="ui-content" data-theme="a">
+                            <p>#{playerController.playerProfile.shotTask.taskID.description}</p>
+                        </div>
+                      <br/>
+                    <div data-role="collapsible" data-theme="b" data-content-theme="c" data-inset="false">
+                        <h3>Recommendation(s)</h3>
+                       <ul data-role="listview">
+                            <ui:repeat value="#{playerController.playerProfile.shotTask.recommendationList}" var="recommendation">
+                                <li>
+                                  <h:outputLabel value="#{recommendation.name}"/>
+                                </li>
+                            </ui:repeat>
+                        </ul>
+                    </div><!-- /collapsible -->
+                    <div data-role="collapsible" data-theme="b" data-content-theme="c" data-inset="false">
+                    <h3>Note(s)</h3>
+                    <ul data-role="listview">
+                        <ui:repeat value="#{playerController.playerProfile.shotTask.noteList}" var="note">
+                            <li><h:outputLabel value="#{note.text}"/></li>
+                        </ui:repeat>
+                    </ul>
+                </div><!-- /collapsible -->
+
+
+
+
+
+                    </h:form>
+                </div>
+            </div>
+
+    </ui:define>
+</ui:composition>

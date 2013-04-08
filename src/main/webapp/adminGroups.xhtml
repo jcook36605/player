@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                template="/WEB-INF/templates/default.xhtml">
+    <ui:define name="content">
+
+        <h:form>
+            <div data-role="header">
+                <a href="admin.jsf" data-icon="back"  data-direction="reverse" >Back</a>
+                <h1>Group Administration</h1>
+                <a href="main.jsf" data-icon="home" >Home</a>
+                <span class="ui-title" />
+            </div><!-- /header -->
+        </h:form>
+
+
+
+
+        <div data-role="content">
+
+            <h:form>
+
+                <ul data-role="listview" data-theme="c" data-content-theme="a">
+                    <ui:repeat value="#{sessionController.groups}" var="group">
+                        <li>
+                            <h:commandLink value="#{group.name}" action="#{sessionController.loadGroup(group.getId())}"/>
+                        </li>
+                    </ui:repeat>
+                </ul>
+
+                <!-- /popup -->
+            </h:form>
+        </div>
+
+
+        <h:form>
+        <div data-role="footer" class="ui-bar" data-theme="c" data-content-theme="b">
+            <a href="#addShotPopup" data-rel="popup" data-position-to="window" data-role="button" data-inline="true" data-icon="plus" data-theme="b" data-transition="pop">Add Group</a>
+        </div>
+        </h:form>
+         <div data-role="popup" id="popupMenu" data-theme="a">
+                <div data-role="popup" id="addShotPopup" data-theme="a" class="ui-corner-all">
+                    <h:form>
+                    <h1>Add Group</h1>
+                    <h:panelGrid columns="1">
+                        <h:outputLabel value="Name:"/>
+                        <h:inputText value="#{sessionController.groupManager.name}" data-theme="a"/>
+                        <h:outputLabel value="Description:"/>
+                        <h:inputTextarea value="#{sessionController.groupManager.description}" data-theme="a" rows="12" cols="30"/>
+                        <h:panelGrid columns="2">
+                            <a href="#" data-role="button" data-inline="true"  data-direction="reverse" data-rel="back" data-theme="c">Cancel</a>
+                            <h:commandButton value="Save" action="#{sessionController.addGroup()}" data-theme="c" data-icon="save"/>
+                        </h:panelGrid>
+                    </h:panelGrid>
+                    </h:form>
+                </div>
+
+            </div>
+
+
+
+
+    </ui:define>
+</ui:composition>

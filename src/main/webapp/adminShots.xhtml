@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                template="/WEB-INF/templates/default.xhtml">
+    <ui:define name="content">
+
+        <h:form>
+            <div data-role="header">
+                <a href="admin.jsf" data-icon="back" data-direction="reverse" >Back</a>
+                <h1>Shot Administration</h1>
+                <a href="main.jsf" data-icon="home" >Home</a>
+                <span class="ui-title" />
+            </div><!-- /header -->
+        </h:form>
+            <div data-role="content">
+                <h:form>
+                    <ui:repeat value="#{adminController.shotManager.types}" var="shotT">
+
+                        <div data-role="collapsible" data-theme="b" data-content-theme="d" data-inset="false" >
+                                    <h2>#{shotT.type}</h2>
+                                    <ul data-role="listview" data-theme="c" data-content-theme="a">
+                                        <ui:repeat value="#{shotT.shotList}" var="shot">
+                                            <li>
+                                                <h:commandLink value="#{shot.name}" action="#{adminController.loadShot(shot)}" />
+                                            </li>
+                                        </ui:repeat>
+                                    </ul>
+                                <!-- /collapsible -->
+                        </div><!-- /collapsible set -->
+
+                       </ui:repeat>
+                    <!-- /popup -->
+                </h:form>
+            </div>
+
+
+        <h:form>
+        <div data-role="footer" class="ui-bar" data-theme="c" data-content-theme="b">
+            <a href="#addShotPopup" data-rel="popup" data-position-to="window" data-role="button" data-inline="true" data-icon="plus" data-theme="b" data-transition="pop">Add Shot</a>
+
+            <a href="#addShotTypePopup" data-rel="popup" data-position-to="window" data-role="button" data-inline="true" data-icon="plus" data-theme="b" data-transition="pop">Add Shot Type</a>
+
+
+        </div>
+        </h:form>
+        <div data-role="popup" id="popupMenu" data-theme="a">
+                <div data-role="popup" id="addShotPopup" data-theme="a" class="ui-corner-all">
+                    <h:form>
+                    <h1>Add Shot</h1>
+                    <h:panelGrid columns="1">
+                        <h:outputLabel value="Type:"/>
+                        <h:selectOneMenu value="#{adminController.shotManager.typeId}" data-theme="a">
+                            <f:selectItems value="#{adminController.shotManager.shotTypes}" />
+                        </h:selectOneMenu>
+                        <h:outputLabel value="Name:"/>
+                        <h:inputText value="#{adminController.shotManager.name}" data-theme="a"/>
+                        <h:outputLabel value="Description:"/>
+                        <h:inputTextarea value="#{adminController.shotManager.description}" data-theme="a" rows="12" cols="30"/>
+                        <h:panelGrid columns="2">
+                            <a href="#" data-role="button" data-inline="true" data-rel="back" data-theme="c">Cancel</a>
+                            <h:commandButton value="Save" action="#{adminController.addShot()}" data-theme="c" data-icon="save"/>
+                        </h:panelGrid>
+                    </h:panelGrid>
+                    </h:form>
+                </div>
+
+            </div>
+
+        <div data-role="popup" id="popupMenu" data-theme="a">
+            <div data-role="popup" id="addShotTypePopup" data-theme="a" class="ui-corner-all">
+                <h:form>
+                    <h1>Add Shot Type</h1>
+                    <h:panelGrid columns="1">
+                        <h:outputLabel value="Type:"/>
+                        <h:inputText value="#{adminController.shotManager.type}" data-theme="a"/>
+                        <h:outputLabel value="Description:"/>
+                        <h:inputTextarea value="#{adminController.shotManager.description}" data-theme="a" rows="12" cols="30"/>
+                        <h:panelGrid columns="2">
+                            <a href="#" data-role="button" data-inline="true" data-rel="back" data-theme="c">Cancel</a>
+                            <h:commandButton value="Save" action="#{adminController.addShotType()}" data-theme="c" data-icon="save"/>
+                        </h:panelGrid>
+                    </h:panelGrid>
+                </h:form>
+            </div>
+
+        </div>
+
+    </ui:define>
+</ui:composition>

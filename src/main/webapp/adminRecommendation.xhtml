@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html" xmlns:c="http://java.sun.com/jsp/jstl/core"
+                template="/WEB-INF/templates/default.xhtml">
+    <ui:define name="content">
+
+        <h:form>
+            <div data-role="header">
+                <a href="admin.jsf" data-icon="back" data-direction="reverse" >Back</a>
+                <h1>Recommendation Administration</h1>
+                <a href="main.jsf" data-icon="home" >Home</a>
+
+                <span class="ui-title" />
+            </div><!-- /header -->
+        </h:form>
+
+
+
+
+        <div data-role="content">
+            <h:form>
+                <div data-role="collapsible" data-theme="b" data-inset="false">
+                    <h3>All Recommendation</h3>
+                    <ul data-role="listview" data-theme="c" data-content-theme="a">
+                        <ui:repeat value="#{adminController.recommendationManager.allRecommendations}" var="rec">
+                            <li><h:commandLink value="#{rec.name}" action="#{adminController.loadRecommendation(rec.id)}"/></li>
+                        </ui:repeat>
+                    </ul>
+                </div><!-- /collapsible -->
+
+
+                <c:forEach items="#{adminController.recommendationManager.recommendationByShots}" var="shot">
+                 <c:if test="#{not empty shot.recommendationList}">
+                    <div data-role="collapsible" data-theme="b" data-inset="false">
+                    <h3>#{shot.name}</h3>
+
+                    <ul data-role="listview" data-theme="c" data-content-theme="a">
+                        <c:forEach items="#{shot.recommendationList}" var="r">
+                        <li><h:commandLink value="#{r.name}" action="#{adminController.loadRecommendation(r.id)}"/></li>
+                        </c:forEach>
+                    </ul>
+                </div><!-- /collapsible -->
+                 </c:if>
+                </c:forEach>
+            </h:form>
+        </div>
+
+
+
+        <h:form>
+            <div data-role="footer" class="ui-bar" data-theme="c" data-content-theme="b">
+                <a href="#addRecPopup" data-rel="popup" data-position-to="window" data-role="button" data-inline="true" data-icon="plus" data-theme="b" data-transition="pop">Add Recommendation</a>
+            </div>
+        </h:form>
+        <div data-role="popup" id="popupMenu" data-theme="a">
+            <div data-role="popup" id="addRecPopup" data-theme="a" class="ui-corner-all">
+                <h:form>
+                    <h1>Add Recommendation</h1>
+                    <h:panelGrid columns="1">
+
+                        <h:panelGrid columns="2">
+                            <h:outputLabel value="Name:"/>
+                            <h:inputText value="#{adminController.recommendationManager.name}" data-theme="a"/>
+                        </h:panelGrid>
+                        <h:outputLabel value="Description:"/>
+                        <h:inputTextarea value="#{adminController.recommendationManager.description}" data-theme="a" rows="12" cols="30"/>
+                        <h:panelGrid columns="2">
+                            <a href="#" data-role="button" data-inline="true" data-rel="back" data-theme="c">Cancel</a>
+                            <h:commandButton value="Save" action="#{adminController.addRecommendation}" data-role="button" data-inline="true" data-theme="b"  data-icon="save"/>
+
+                        </h:panelGrid>
+
+                    </h:panelGrid>
+
+                </h:form>
+            </div>
+
+        </div>
+
+
+
+    </ui:define>
+</ui:composition>

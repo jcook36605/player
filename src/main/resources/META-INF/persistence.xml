@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0"
+   xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="
+        http://java.sun.com/xml/ns/persistence
+        http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+   <persistence-unit name="primary">
+      <!-- If you are running in a production environment, add a managed
+         data source, the example data source is just for proofs of concept! -->
+      <jta-data-source>java:/tennisdb</jta-data-source>
+      <properties>
+         <!-- Properties for Hibernate -->
+         <property name="hibernate.hbm2ddl.auto" value="update" />
+         <property name="hibernate.show_sql" value="false" />
+          <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
+
+          <property name="hibernate.format_sql" value="true"/>
+          <property name="hibernate.default_catalog" value="tennisdb"/>
+      </properties>
+   </persistence-unit>
+
+
+   <!-- <persistence-unit name="primary">
+        <provider>org.hibernate.ejb.HibernatePersistence</provider>
+        <jta-data-source>breportDatasource</jta-data-source>
+        &lt;!&ndash; The <jar-file> element is necessary if you put the persistence.xml in the WAR and the classes in the JAR &ndash;&gt;
+        &lt;!&ndash;
+        <jar-file>../../vehicles.jar</jar-file>
+        &ndash;&gt;
+        <properties>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.show_sql" value="false"/>
+            <property name="hibernate.format_sql" value="true"/>
+            <property name="hibernate.default_catalog" value="breport"/>
+
+            <property name="jboss.entity.manager.factory.jndi.name" value="java:/breportEntityManagerFactory"/>
+        </properties>
+    </persistence-unit>-->
+</persistence>

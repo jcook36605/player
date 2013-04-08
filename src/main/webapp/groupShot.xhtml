@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:c="http://java.sun.com/jstl/core"
+                template="/WEB-INF/templates/default.xhtml">
+
+       <ui:define name="content">
+          <h:form>
+               <div data-role="header" data-fullscreen="true">
+                   <h:commandLink data-role="button" value="Back"  data-direction="reverse" data-icon="back" action="groupProfile.xhtml"/>
+                   <h1>Manage Group</h1>
+                   <span class="ui-title" />
+               </div><!-- /header -->
+           </h:form>
+
+          <h:form>
+            <div data-role="content">
+
+                <div align="center">
+                    <table>
+                        <tr>
+                            <td>
+                                <a href="#shotTaskPopup" data-rel="popup" data-role="button" data-inline="true" data-icon="bars" data-theme="b" data-transition="pop">Task By Shot</a>
+
+                            </td>
+                            <td>
+                                <a href="#shotTaskAllPopup" data-rel="popup" data-role="button" data-inline="true" data-icon="bars" data-theme="b" data-transition="pop">All Task</a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div data-role="popup" id="shotTaskPopup" data-theme="none">
+                    <ul data-role="listview">
+                        <ui:repeat value="#{sessionController.groupManager.groupShot.shotID.shotTypeID.taskList}" var="task">
+                            <li>
+                                <h:commandLink value="#{task.name}" data-role="button" data-icon="plus" data-theme="c" action="#{sessionController.addTask(task)}"/>
+                            </li>
+                        </ui:repeat>
+                    </ul>
+                </div>
+
+                <div data-role="popup" id="shotTaskAllPopup" data-theme="none">
+                    <ul data-role="listview">
+                        <ui:repeat value="#{sessionController.allTasks}" var="task">
+                            <li>
+                                <h:commandLink value="#{task.name}" data-role="button" data-icon="plus" data-theme="c"  action="#{sessionController.addTask(task)}" />
+                            </li>
+                        </ui:repeat>
+                    </ul>
+                </div>
+
+
+                <div align="center">
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a">
+                            <div class="ui-bar ui-bar-b floatright" >
+                                <h:outputLabel value="Group:"/>
+                            </div>
+                            <div class="ui-bar ui-bar-b floatright" >
+                                <h:outputLabel value="Shot:"/>
+                            </div>
+                            <div class="ui-bar ui-bar-b floatright" >
+                                <h:outputLabel value="Type:"/>
+                            </div>
+                        </div>
+                        <div class="ui-block-b">
+                            <div class="ui-bar ui-bar-a floatleft" style="white-space:nowrap;">
+                                <h:outputText value="#{sessionController.groupManager.group.name}" />
+                                <a href="#groupInfoPopup" data-rel="popup" data-role="button" class="ui-icon-alt" data-inline="true" data-transition="pop" data-icon="info" data-mini="true" data-theme="e" data-iconpos="notext"/>
+                             </div>
+                            <div class="ui-bar ui-bar-a floatleft" style="white-space:nowrap;">
+                                <h:outputText value="#{sessionController.groupManager.groupShot.shotID.name}" />
+                                <a href="#shotInfoPopup" data-rel="popup" data-role="button" class="ui-icon-alt" data-inline="true" data-transition="pop" data-icon="info" data-mini="true" data-theme="e" data-iconpos="notext"/>
+                            </div>
+                            <div class="ui-bar ui-bar-a floatleft">
+                                <h:outputText value="#{sessionController.groupManager.groupShot.shotID.shotTypeID.type}" />
+                                <a href="#shotTypePopup" data-rel="popup" data-role="button" class="ui-icon-alt" data-inline="true" data-transition="pop" data-icon="info" data-mini="true" data-theme="e" data-iconpos="notext"/>
+                            </div>
+                        </div>
+
+                    </div><!-- /grid-a -->
+
+                    <div data-role="popup" id="groupInfoPopup" class="ui-content" data-theme="a">
+                        <p>#{sessionController.groupManager.group.description}</p>
+                    </div>
+
+                    <div data-role="popup" id="shotInfoPopup" class="ui-content" data-theme="a">
+                        <p>#{sessionController.groupManager.groupShot.shotID.description}</p>
+                    </div>
+
+                    <div data-role="popup" id="shotTypePopup" class="ui-content" data-theme="a">
+                        <p>#{sessionController.groupManager.groupShot.shotID.shotTypeID.description}</p>
+                    </div>
+                    <br/>
+
+                    <div data-role="collapsible" data-inset="false" data-theme="b">
+                        <h3>Selected Task(s)</h3>
+                        <ul data-role="listview" data-theme="c" data-content-theme="a">
+                            <ui:repeat value="#{sessionController.groupManager.groupShot.groupShotTaskList}" var="shotTask">
+
+                                <li>
+                                    <h:commandLink value="#{shotTask.taskID.name}" />
+                                </li>
+                            </ui:repeat>
+                        </ul>
+                    </div>
+
+                </div>
+
+
+            </div>
+          </h:form>
+<!--
+           <div data-role="footer">
+               <div data-role="navbar" data-iconpos="top">
+                   <ul>
+                       <li><a href="#">One</a></li>
+                       <li><a href="#">Two</a></li>
+                       <li><a href="#">Three</a></li>
+                   </ul>
+               </div>&lt;!&ndash; /navbar &ndash;&gt;
+           </div>-->
+
+    </ui:define>
+</ui:composition>

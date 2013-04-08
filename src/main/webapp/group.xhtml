@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                template="/WEB-INF/templates/default.xhtml">
+    <ui:define name="content">
+
+            <h:form>
+                <div data-role="header">
+                    <h:commandLink value="Back" data-icon="back"  data-direction="reverse" action="adminGroups.xhtml"/>
+                    <h1>Manage Group</h1>
+                    <span class="ui-title" />
+                </div><!-- /header -->
+            </h:form>
+
+
+
+
+             <div align="center">
+                 <h:form>
+                 <div data-role="content">
+                <h1>Group</h1>
+                    <h:panelGrid columns="1">
+                    <h:outputLabel value="Name:"/>
+                    <h:inputText value="#{sessionController.groupManager.group.name}" data-theme="a"/>
+
+                    <h:outputLabel value="Description:"/>
+                    <h:inputTextarea value="#{sessionController.groupManager.group.description}" data-theme="a" rows="12" cols="30"/>
+                </h:panelGrid>
+                   <div data-role="collapsible" data-theme="b" data-inset="false">
+                        <h4>Player(s)</h4>
+                        <h:selectManyCheckbox data-role="listview" data-theme="c" data-content-theme="a" data-inset="false" layout="pageDirection" value="#{sessionController.playersManager.playerIds}">
+                            <f:selectItems value="#{sessionController.playersManager.players}"/>
+                        </h:selectManyCheckbox>
+                        <h:commandButton value="Save" action="#{sessionController.saveGroup}"/>
+
+                    </div>
+                   <div data-role="collapsible" data-inset="false" data-theme="b">
+                       <h3>Shots</h3>
+                       <ul data-role="listview" data-theme="c" data-content-theme="a">
+                           <ui:repeat value="#{sessionController.groupManager.group.groupShotList}" var="groupShot" >
+                               <li><h:commandLink value="#{groupShot.shotID.name}" action="#{sessionController.selectGroupShot(groupShot)}"/></li>
+                           </ui:repeat>
+                       </ul>
+                   </div>
+            </div>
+                 </h:form>
+             </div>
+
+        <h:form>
+            <div data-role="footer" class="ui-bar" data-theme="c" data-content-theme="b">
+
+                <h:commandLink value="Delete"  action="#{sessionController.deleteGroup}" data-rel="popup" data-position-to="window" data-role="button" data-inline="true" data-icon="minus" data-theme="b" data-transition="pop"/>
+                <h:commandLink value="Cancel"  action="adminGroups.xhtml" data-role="button" data-inline="true" data-icon="cancel" data-theme="b"/>
+                <h:commandButton value="Add Shot" action="#{sessionController.addShotView}" data-role="button" data-inline="true" data-theme="b"  data-icon="add"/>
+                <h:commandButton value="Save" action="#{sessionController.saveGroup}" data-role="button" data-inline="true" data-theme="b"  data-icon="add"/>
+
+
+            </div>
+        </h:form>
+
+
+
+
+    </ui:define>
+</ui:composition>

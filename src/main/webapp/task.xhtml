@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                template="/WEB-INF/templates/default.xhtml">
+    <ui:define name="content">
+
+        <h:form>
+            <div data-role="header">
+                <h:commandLink value="Back" data-icon="back"  data-direction="reverse" action="adminTasks.xhtml"/>
+                <span class="ui-title" />
+            </div><!-- /header -->
+        </h:form>
+
+
+        <h:form>
+            <div align="center">
+
+            <div data-role="content">
+
+                    <h1>Task</h1>
+                    <h:panelGrid columns="1">
+
+                        <h:panelGrid columns="2">
+                        <h:outputLabel value="Name:"/>
+                        <h:inputText value="#{adminController.taskManager.task.name}" data-theme="a"/>
+                        </h:panelGrid>
+                        <h:outputLabel value="Description:"/>
+                        <h:inputTextarea value="#{adminController.taskManager.task.description}" data-theme="a" rows="12" cols="30"/>
+
+
+                    </h:panelGrid>
+
+            </div>
+            </div>
+
+
+        <div data-role="footer" class="ui-bar" data-theme="c" data-content-theme="b">
+            <h:commandLink value="Delete"  action="#{adminController.deleteTask()}" data-rel="popup" data-position-to="window" data-role="button" data-inline="true" data-icon="minus" data-theme="b" data-transition="pop"/>
+            <h:commandLink value="Cancel"  action="adminTasks.xhtml" data-role="button" data-inline="true" data-icon="cancel" data-theme="b"/>
+            <h:commandButton value="Save" action="#{adminController.saveTask()}" data-role="button" data-inline="true" data-theme="b"  data-icon="save"/>
+        </div>
+
+        </h:form>
+    </ui:define>
+</ui:composition>

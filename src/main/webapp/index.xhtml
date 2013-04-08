@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:ui="http://java.sun.com/jsf/facelets"
+   xmlns:f="http://java.sun.com/jsf/core"
+   xmlns:h="http://java.sun.com/jsf/html"
+   template="/WEB-INF/templates/default.xhtml">
+   <ui:define name="content">
+
+
+      <h:form>
+
+
+
+          <div data-position="fixed" data-role="header" >
+              <h1>Helicopter</h1>
+          </div>
+
+
+          <div align="center" data-role="content" id="Div2" name="contentConfirmation">
+              <h1></h1>
+              <h2></h2>
+              <div data-role="fieldcontain">
+                  <h:outputLabel value="Username:*"/>
+                  <h:inputText class="required"  name="name"  value="xxxxxxxx" />
+
+          </div><div data-role="fieldcontain"><h:outputLabel value="Password:*"/>
+                  <h:inputText class="required"  name="password"  value="xxxxxxxx" />
+
+          </div>
+
+              <h:commandButton data-theme="c"  id="register" action="#{memberRegistration.signIn}" value="Login"  data-transition="pop"/>
+          </div>
+
+
+
+      </h:form>
+
+
+
+   </ui:define>
+</ui:composition>

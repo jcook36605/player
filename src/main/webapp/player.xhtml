@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:c="http://java.sun.com/jstl/core"
+                template="/WEB-INF/templates/default.xhtml">
+    <ui:define name="content">
+
+        <h:form>
+            <div data-role="header">
+                <a href="playerResults.jsf" data-icon="back">Back</a>
+                <h1>Player Profile</h1>
+                <a href="main.jsf" data-icon="home" >Home</a>
+                <span class="ui-title" />
+            </div><!-- /header -->
+        </h:form>
+
+
+
+
+        <div data-role="content">
+
+            <div align="center">
+                <a href="#popupNested" data-rel="popup" data-role="button" data-inline="true" data-icon="bars" data-theme="b" data-transition="pop">Choose a Shot...</a>
+                <div data-role="popup" id="popupNested" data-theme="none">
+                    <div data-role="collapsible-set" data-theme="b" data-content-theme="b" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" style="margin:0; width:250px;">
+                        <ui:repeat value="#{adminController.shotTypes}" var="shotT">
+                            <div data-role="collapsible" data-inset="false">
+                                <h2>#{shotT.type}</h2>
+                                <ul data-role="listview">
+                                    <ui:repeat value="#{shotT.shotList}" var="shot">
+                                        <li>
+                                            <h:form>
+                                                <h:commandLink value="#{shot.name}" action="#{playerController.addShot(shot)}" />
+                                            </h:form>
+                                        </li>
+                                    </ui:repeat>
+                                </ul>
+                            </div><!-- /collapsible -->
+                        </ui:repeat>
+                    </div><!-- /collapsible set -->
+                </div><!-- /popup -->
+            </div>
+
+            <h:form>
+            <div align="center">
+                <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                            <div class="ui-bar ui-bar-a floatright"  >
+                                <h:outputLabel value="Player Name"/>
+                            </div>
+                    </div>
+                    <div class="ui-block-b">
+                            <div class="ui-bar ui-bar-b floatleft">
+                                <h:outputText value="#{playerController.playerProfile.player.lastName}"/>, <h:outputText value="#{playerController.playerProfile.player.firstName}"/>
+                            </div>
+                    </div>
+               </div><!-- /grid-a -->
+
+                <br/>
+                <ul data-role="listview" data-count-theme="c" data-theme="b" data-inset="true">
+                    <li data-role="list-divider" data-count-theme="b" data-theme="a">Player Shot(s)</li>
+                    <ui:repeat value="#{playerController.playerShots}" var="playerShot">
+                        <li>
+                            <h:commandLink  data-transition="flow" action="#{playerController.selectPlayerShot(playerShot)}" value="#{playerShot.shotID.shotTypeID.type} - #{playerShot.shotID.name}"/>
+                        </li>
+                    </ui:repeat>
+                </ul>
+            </div>
+            </h:form>
+        </div>
+
+        <div data-role="footer" class="ui-bar">
+             <a href="playerUpdate.xhtml" data-icon="edit" data-transition="flow" >Edit</a>
+        </div><!-- /footer -->
+
+    </ui:define>
+</ui:composition>

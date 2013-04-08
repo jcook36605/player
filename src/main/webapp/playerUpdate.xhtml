@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:c="http://java.sun.com/jstl/core"
+                template="/WEB-INF/templates/default.xhtml">
+    <ui:define name="content">
+
+        <div data-role="header">
+                    <a href="player.xhtml" data-icon="back"  data-direction="reverse" >Back</a>
+                    <a href="main.xhtml" data-icon="home"  >Home</a>
+            <span class="ui-title" />
+        </div><!-- /header -->
+
+        <h:form>
+            <div data-role="content">
+                <div align="center">
+                    <table>
+                        <tr>
+                            <td><h:outputLabel value="First Name"/></td>
+                            <td><h:inputText value="#{playerController.playerProfile.player.firstName}" /></td>
+                            <td><h:outputLabel value="Last Name"/> </td>
+                            <td><h:inputText value="#{playerController.playerProfile.player.lastName}" /></td>
+                        </tr>
+                        <tr>
+                            <td><h:outputLabel value="City"/></td>
+                            <td><h:inputText value="#{playerController.playerProfile.player.city}" /></td>
+                            <td><h:outputLabel value="Address"/></td>
+                            <td><h:inputText value="#{playerController.playerProfile.player.address}"/></td>
+                        </tr>
+                    </table>
+                    <h:commandButton value="Save" action="#{playerController.updatePlayer}" data-transition="flow" data-inline="true"/>
+                </div>
+            </div>
+        </h:form>
+
+        <div data-role="footer" class="ui-bar">
+
+        </div><!-- /footer -->
+
+    </ui:define>
+</ui:composition>

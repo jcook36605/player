@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                template="/WEB-INF/templates/default.xhtml">
+    <ui:define name="content">
+
+        <h:form>
+            <div data-role="header">
+                <h1>Administration</h1>
+                <a href="main.jsf" data-icon="home" >Home</a>
+                <span class="ui-title" />
+            </div><!-- /header -->
+        </h:form>
+
+        <h:form>
+
+
+
+            <div data-role="content"  >
+                <ul data-role="listview" >
+
+                    <li>
+                        <a href="adminShots.jsf" >Shot Administration</a>
+                    </li>
+                    <li>
+                        <a href="adminTasks.jsf">Task Administration</a>
+                    </li>
+                    <li>
+                        <a href="adminRecommendation.jsf">Recommendation Administration</a>
+
+                    </li>
+                    <li>
+                        <a href="adminGroups.jsf">Group Administration</a>
+                    </li>
+                </ul>
+
+
+            </div>
+        </h:form>
+
+    </ui:define>
+</ui:composition>
